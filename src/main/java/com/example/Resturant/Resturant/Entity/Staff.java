@@ -29,20 +29,20 @@ public class Staff {
     //generating but not using that
     @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
             name = "Staff_id_sequence",
-            sequenceName = "Staff_id_sequence", //If we don’t specify a sequence name,
-                                                // Hibernate will reuse the same hibernate_sequence for different types.
+            sequenceName = "Staff_id_sequence",     //If we don’t specify a sequence name,
+                                                    // Hibernate will reuse the same hibernate_sequence for different types.
             allocationSize = 1,
-            initialValue = 100//the least value that entity can have and start from that
+            initialValue = 100                      //the least value that entity can have and start from that
+            //start from 100 not 101
     )
     //using created sequence
     @GeneratedValue(
-            strategy =  GenerationType.SEQUENCE,//AUTO, IDENTITY, SEQUENCE and TABLE
-                                                //the generation type defaults to AUTO.
-            generator = "Staff_id_sequence" //If we don’t specify a sequence name,
-                                            // Hibernate will reuse the same hibernate_sequence for different types.
-
+            strategy =  GenerationType.SEQUENCE,    //AUTO, IDENTITY, SEQUENCE and TABLE
+                                                    //the generation type defaults to AUTO.
+            generator = "Staff_id_sequence"         //If we don’t specify a sequence name,
+                                                    // Hibernate will reuse the same hibernate_sequence for different types.
     )
-    private Long StaffId;//UUID instead of Long will generate an id of the form “8dd5f315-9788-4d00-87bb-10eed9eff566”.
+    private Long StaffId; //UUID instead of Long will generate an id of the form “8dd5f315-9788-4d00-87bb-10eed9eff566”.
     private String firstName;
     private String lastName;
     /** automatically database change the format from camel to last_name */
