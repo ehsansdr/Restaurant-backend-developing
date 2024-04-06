@@ -47,6 +47,6 @@ class StaffRepositoryTest {
 
     @Test
     public void deleteRecordById(){
-        staffRepository.deleteById(103L);
+        staffRepository.deleteById(107L);
     }
 }

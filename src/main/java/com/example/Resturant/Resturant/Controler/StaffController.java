@@ -12,10 +12,22 @@ import java.util.List;
 @RequestMapping("Restaurant/staff")//use localhost:8080/Restaurant first of  links and  then the type the rest
 public class StaffController {
 
+    /**  send the RequestBody in Body and Raw and json in post man
+     * you get 415 error*/
 
     @Autowired
     private StaffRepository staffRepository;
 
+    @PostMapping("/addStaff")                              //find All Staffs
+    public String addStaff(@RequestBody Staff staff){    //return List<Staff>  ,not List<String>
+//        {
+//            "firstName" : ".",
+//             "lastName" : ".."
+//        }
+        System.out.println("addStaff called");
+        staffRepository.save(staff);
+        return "staff : " + staff + "\nAdded";
+    }
 
     @GetMapping("/findAllStaffRepository")                              //find All Staffs
     public List<Staff> findAllStaffRepository(){    //return List<Staff>  ,not List<String>
@@ -35,17 +47,23 @@ public class StaffController {
     public String findStaffLastName(@RequestBody int id){
         System.out.println("findStaffLastName called");
 
+
         return "Last name of id : " +  id + "\n Last Name : \"" + staffRepository.getLastNameById(id) + "\"";
     }
 
     @PutMapping("/deleteStaffRecordById")                              //delete Staff By Id
-    public String  deleteStaffRecordById(@RequestBody long id){
+    public String  deleteStaffRecordById(@RequestBody int id){
+        /**  send the RequestBody in Body and Raw and json in post man */
+
+
         System.out.println("deleteStaffRecordById called");
+
         Staff staffRecord = staffRepository.findStaffRecordById(id);
+
         if (staffRecord == null){
             return "there is no staff by id : " + id;
         } else if (staffRecord != null) {
-            staffRepository.deleteById(id);
+            staffRepository.deleteById(Long.valueOf(id));
             return staffRecord + "\ndeleted successfully";
         }
         return "exception in method deleteStaffRecordById";
