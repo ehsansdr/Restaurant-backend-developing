@@ -19,18 +19,37 @@ public interface StaffRepository extends JpaRepository<Staff,Long> {
      *     the value = "(use mysql statement , not jpql statement)"
      *
      *     */
+
+
     @Query(
             value = "select first_name from Staff s where staff_id = ?1",
             nativeQuery = true
     )
     String getFirstNameById(int staffId);
 
+//    @Query(
+//            value = "select first_name from Staff s where staff_id = ?1",
+//            nativeQuery = true
+//    )
+//    String getFirstNameById(int staffId);
+
 
     //String getFirstNameById(int staffId);
     @Query(
-            value = "select last_name from Staff s where staff_id = ?1",
+            value = "select last_name from Staff s where staff_id = :staffId",
             nativeQuery = true
     )
     String getLastNameById(@Param("staffId")int id);
+
+    @Query(
+            value = "delete from dbrestaurant.staff where staff_id = :staffId",
+            nativeQuery = true
+    )
+    boolean deleteNameById(@Param("staffId")int id);
+    @Query(
+            value = "select * from staff where staff_id = :staffId",
+            nativeQuery = true
+    )
+    Staff findStaffRecordById(@Param("staffId")long id);
 
 }

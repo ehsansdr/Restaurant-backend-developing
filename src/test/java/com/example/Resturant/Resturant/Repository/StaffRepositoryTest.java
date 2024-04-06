@@ -44,4 +44,9 @@ class StaffRepositoryTest {
         System.out.println("*******\n");
 
     }
+
+    @Test
+    public void deleteRecordById(){
+        staffRepository.deleteById(103L);
+    }
 }
