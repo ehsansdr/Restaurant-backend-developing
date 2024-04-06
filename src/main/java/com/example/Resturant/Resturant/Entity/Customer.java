@@ -41,7 +41,7 @@ public class Customer {
     private String firstName;
     private String LastName;
 
-    @Id
+    @Id//if you want multiple sequence , make sure have @Id for each new @SequenceGenerator
     @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
             name = "Customer_phone_Number_sequence",
             sequenceName = "Customer_phone_Number_sequence",

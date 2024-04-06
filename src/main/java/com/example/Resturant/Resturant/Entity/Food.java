@@ -37,7 +37,7 @@ public class Food {
     )
     private Long FoodID;
     @Column(/** if you do not have @Table annotation you get bean exception */
-//            name = "Foods_name",
+            name = "Foods_name",
             nullable = false        //it means showMeAllRecordOfStudent can leave this empty
     )
     private String FoodsName;                           //kg or litre

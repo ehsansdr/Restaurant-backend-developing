@@ -51,7 +51,7 @@ public class Transaction {
 //    )
 
     /** bug we can not add this to table*/
-    List<Food> foods = new ArrayList<>();
+    //List<Food> foods = new ArrayList<>();
 //
 //
 //    public void addStudent(Food food){
