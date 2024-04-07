@@ -69,7 +69,8 @@ public class Customer {
     @JoinColumn(name = "Orders",                        // if you change this the previous column does not delete and the new column will add by this name
             referencedColumnName = "customerId")        // if you want to reference that column has this in its calls
                                                         // in the class you have @OneToMany and have this reference to that class
-                                                        // and have this referencedColumnName = "customerId") exactly no mather that class has this field
+                                                        // and have this referencedColumnName = "customerId") exactly
+                                                        // no mather that class (the below type object)has this field
     private List<Transaction> transactions;
 
     public void adding(Transaction transaction){
