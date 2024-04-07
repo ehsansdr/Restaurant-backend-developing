@@ -36,13 +36,32 @@ public class Food {
             generator = "Food_sequence"
     )
     private Long FoodID;
-    @Column(/** if you do not have @Table annotation you get bean exception */
-            name = "Foods_name",
-            nullable = false        //it means showMeAllRecordOfStudent can leave this empty
-    )
-    private String FoodsName;                           //kg or litre
-    private long price;
-    private long balance;
+
+    private String FoodsName;
+
+
+    private long price;                     //kg or litre
+    private long amount;
+
+
+//    /** bug */
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "FoodsName",                 // if you change this the previous column does not delete
+//            referencedColumnName = "FoodID")        // and the new column will add by this name
+//    private List<Transaction> transactions;
+
+
+//    public void adding(Transaction transaction){
+//        if (transactions == null) {
+//            this.transactions = new ArrayList<>();
+//            this.transactions.add(transaction);
+//            System.out.println("\nthis.students = new ArrayList<>();\n");
+//        }
+//        else{
+//            this.transactions.add(transaction);
+//            System.out.println("\nstudents.add(student);\n");
+//        }
+//    }
 //    @ManyToMany(
 //            cascade = CascadeType.ALL
 //    )

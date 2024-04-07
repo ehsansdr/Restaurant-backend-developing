@@ -50,20 +50,23 @@ public class Customer {
 
     /** we have bug here if we un commit this we get bean creation exception because of
      * multiple sequence*/
-    @Column
+    @Column(nullable = false)
     private String phoneNumber;
-    @ManyToOne
-    @JoinColumn(
 
-    )
     private String postal_Code;
 
     @Column(nullable = false,
             unique = true)
     private String subscription_Code;
 
+
+    /** you will not see this column  in this class table ,
+     * you see this to the table or class that you have the type (in this case you see ths in "Transaction" )
+     * be careful, if here you have @OneToMany ,it should have @ManyToOne in the that type class
+     * (in this case you should have @ManyToOne in "Transaction" )
+     * and have real and same referencedColumnName = "(field name ,not that column name that shows for column in database,the java class name)"*/
     @OneToMany
-    @JoinColumn(name = "Transactions",                  // if you change this the previous column does not delete
+    @JoinColumn(name = "Orders",                        // if you change this the previous column does not delete
             referencedColumnName = "customerId")        // and the new column will add by this name
     private List<Transaction> transactions;
 

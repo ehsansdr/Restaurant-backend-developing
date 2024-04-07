@@ -37,8 +37,27 @@ public class Transaction {
     private Long TransactionId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "customerId")
+    @JoinColumn(name = "customerId",                /** if you do not name this you will
+                                                    get customer_customer_Id so name this */
+                referencedColumnName = "customerId")
     private Customer customer;
+
+
+//    @OneToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(referencedColumnName = "foods_name")
+//    private List<Food> Foods;
+//
+//    public void adding(Food food){
+//        if (food == null) {
+//            this.Foods = new ArrayList<>();
+//            this.Foods.add(food);
+//            System.out.println("\nthis.students = new ArrayList<>();\n");
+//        }
+//        else{
+//            this.Foods.add(food);
+//            System.out.println("\nstudents.add(student);\n");
+//        }
+//    }
 
 //    @OneToMany(//uni directional on to
 //        cascade = CascadeType.ALL  //when ever you are saving new record
