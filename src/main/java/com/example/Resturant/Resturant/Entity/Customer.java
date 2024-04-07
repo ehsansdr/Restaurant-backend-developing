@@ -17,8 +17,10 @@ import java.util.List;
 //                columnNames = "email_Address"//the name of the column the real one
 //        )
 )//NOT CHANGE THE PAST TABLE ,CREATE NEW AND DO NOTHING ABOUT PREVIOUS TABLE
-@SequenceGenerator(name = "a1_seq", sequenceName = "a1_seq", allocationSize    = 1)
-@SequenceGenerator(name = "b1_seq", sequenceName = "b1_seq", allocationSize = 1)
+
+//@SequenceGenerator(name = "a1_seq", sequenceName = "a1_seq", allocationSize    = 1)
+//@SequenceGenerator(name = "b1_seq", sequenceName = "b1_seq", allocationSize = 1)
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -38,75 +40,84 @@ public class Customer {
             generator = "Customer_Id_sequence"
     )
     private Long customerId;
+
+    @Column(nullable = false)
     private String firstName;
+
+    @Column(nullable = false,
+            unique = true)
     private String LastName;
 
-    @Id//if you want multiple sequence , make sure have @Id for each new @SequenceGenerator
-    @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
-            name = "Customer_phone_Number_sequence",
-            sequenceName = "Customer_phone_Number_sequence",
-            allocationSize = 53,
-            initialValue = 253658
-    )
-    //using created sequence
-    @GeneratedValue(
-            strategy =  GenerationType.SEQUENCE,
-            generator = "Customer_phone_Number_sequence"
-    )
+    /** we have bug here if we un commit this we get bean creation exception because of
+     * multiple sequence*/
+    @Column
     private String phoneNumber;
-    @Id
-    @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
-            name = "postal_Code_sequence",
-            sequenceName = "postal_Code_sequence",
-            allocationSize = 152,
-            initialValue = 32658
-    )
-    //using created sequence
-    @GeneratedValue(
-            strategy =  GenerationType.SEQUENCE,
-            generator = "postal_Code_sequence"
+    @ManyToOne
+    @JoinColumn(
+
     )
     private String postal_Code;
-    @Id
-    @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
-            name = "customer_subscription_Code_sequence",
-            sequenceName = "customer_subscription_Code_sequence",
-            allocationSize = 32,
-            initialValue = 1236
-    )
-    //using created sequence
-    @GeneratedValue(
-            strategy =  GenerationType.SEQUENCE,
-            generator = "customer_subscription_Code_sequence"
-    )
+
+    @Column(nullable = false,
+            unique = true)
     private String subscription_Code;
 
+    @OneToMany
+    @JoinColumn(name = "Transactions",                  // if you change this the previous column does not delete
+            referencedColumnName = "customerId")        // and the new column will add by this name
+    private List<Transaction> transactions;
+
+    public void adding(Transaction transaction){
+        if (transactions == null) {
+            this.transactions = new ArrayList<>();
+            this.transactions.add(transaction);
+            System.out.println("\nthis.students = new ArrayList<>();\n");
+        }
+        else{
+            this.transactions.add(transaction);
+            System.out.println("\nstudents.add(student);\n");
+        }
+    }
+
+
+//    @Id
+//    @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
+//            name = "postal_Code_sequence",
+//            sequenceName = "postal_Code_sequence",
+//            allocationSize = 152,
+//            initialValue = 32658
+//    )
+//    //using created sequence
+//    @GeneratedValue(
+//            strategy =  GenerationType.SEQUENCE,
+//            generator = "postal_Code_sequence"
+//    )
 //    @ManyToMany(
 //            cascade = CascadeType.ALL
 //    )
 //    @JoinTable(// 6:45:0 for this tutorial
 //            //this annotation we need to have with colum we have in this table sowe use this pattern
 //
-//            name = "customer_transaction",//this table would be created
+//            name = "customer_transactions",                     //this table would be created
 //
 //            //one of the column that we want to have to this table from this class
 //            joinColumns = @JoinColumn(
 //                    name = "customer_name",
-//                    referencedColumnName = "customerId"       //we copy and paste the exact name from the course class field
-//                    //so copy paste the exact name of the field
+//                    referencedColumnName = "customerId"         //we copy and paste the exact name from the course class field
+//                                                                //so copy paste the exact name of the field
 //            ),
 //
 //            /** we want to have common and conversely relation between Student and course table so we need
 //             * this pattern : */
 //            inverseJoinColumns = @JoinColumn(
-//                    name = "transaction",
-//                    referencedColumnName = "name"//we copy and paste the exact name from the Student class field
-//                    //so copy and paste the exact name of the field
+//                    name = "transactions",
+//                    referencedColumnName = "name"               //we copy and paste the exact name from the Student class field
+//                                                                //so copy and paste the exact name of the field
 //            )
 //    )
-//    List<Transaction> transactions = new ArrayList<>();
-//
-//
+    //List<Transaction> transactions = new ArrayList<>();
+
+
 //    public void addTransactions(Transaction transaction){
 //        //we add this method becuase we have @ManyToMany in field for students
 //
@@ -121,5 +132,27 @@ public class Customer {
 //        }
 //    }
 
-
+//    @Id//if you want multiple sequence , make sure have @Id for each new @SequenceGenerator
+//    @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
+//            name = "Customer_phone_Number_sequence",
+//            sequenceName = "Customer_phone_Number_sequence",
+//            allocationSize = 53,
+//            initialValue = 253658
+//    )
+//    //using created sequence
+//    @GeneratedValue(
+//            strategy =  GenerationType.SEQUENCE,
+//            generator = "Customer_phone_Number_sequence"
+//    )//    @Id
+////    @SequenceGenerator(/** IF YOU WANT TO DO THIS ON FIELD DECLARE THAT AS Long ,not long or Integer ,Not int */
+////            name = "customer_subscription_Code_sequence",
+////            sequenceName = "customer_subscription_Code_sequence",
+////            allocationSize = 32,
+////            initialValue = 1236
+////    )
+////    //using created sequence
+////    @GeneratedValue(
+////            strategy =  GenerationType.SEQUENCE,
+////            generator = "customer_subscription_Code_sequence"
+////    )
 }

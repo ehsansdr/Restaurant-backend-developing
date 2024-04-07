@@ -35,7 +35,10 @@ public class Transaction {
             generator = "Transaction_sequence"
     )
     private Long TransactionId;
-    private String customerID;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(referencedColumnName = "customerId")
+    private Customer customer;
 
 //    @OneToMany(//uni directional on to
 //        cascade = CascadeType.ALL  //when ever you are saving new record
