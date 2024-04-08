@@ -19,19 +19,20 @@ class TransactionRepositoryTest {
     @Test
     public void saveTransaction(){
         Customer customer1 = Customer.builder()
-                .firstName("Adel")
-                .LastName("Maleki")
-                .phoneNumber("09256968585")
-                .postal_Code("78451")
-                .subscription_Code("2399")
+                .firstName("melina")
+                .LastName("Mahmoodi")
+                .phoneNumber("092968585")
+                .postal_Code("78661")
+                .subscription_Code("88399")
                 .build();
-        /** be careful you should have ( cascade = CascadeType.ALL ) in the source class of this test class or7
+        /** be careful you should have ( cascade = CascadeType.ALL ) in the class that has @ManyToOne this test class or7
          * you should save the component and fill of that class in the=ier Repository
          * then put them in build class
          * and if you do not have cascade andif you do not have this you get error*/
         //customerRepository.save(customer1);
-        /** so have ( cascade = CascadeType.ALL ) in the anoontaion of class and table that will contain the
-         * @ManyToManyyou will not get that error*/
+        /** so have ( cascade = CascadeType.ALL ) in the annotation of class and table that will contain the
+         * @ManyToOne you will not get that error
+         * not necessary for @OneToMany class*/
 
         Transaction transaction = Transaction.builder()
                 .customer(customer1)

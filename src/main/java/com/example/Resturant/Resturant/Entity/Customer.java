@@ -18,7 +18,7 @@ import java.util.List;
 //        )
 )//NOT CHANGE THE PAST TABLE ,CREATE NEW AND DO NOTHING ABOUT PREVIOUS TABLE
 
-//@SequenceGenerator(name = "a1_seq", sequenceName = "a1_seq", allocationSize    = 1)
+@SequenceGenerator(name = "a1_seq", sequenceName = "a1_seq", allocationSize = 1)
 //@SequenceGenerator(name = "b1_seq", sequenceName = "b1_seq", allocationSize = 1)
 
 @AllArgsConstructor
@@ -41,7 +41,8 @@ public class Customer {
     )
     private Long customerId;
 
-    @Column(nullable = false)
+    @Column(nullable = false,
+            unique = true)
     private String firstName;
 
     @Column(nullable = false,
@@ -52,6 +53,7 @@ public class Customer {
      * multiple sequence*/
     @Column(nullable = false)
     private String phoneNumber;
+
 
     private String postal_Code;
 
@@ -66,7 +68,16 @@ public class Customer {
      * (in this case you should have @ManyToOne in "Transaction" class )
      * and have real and same referencedColumnName = "(field name ,not that column name that shows for column in database,the java class name)"
      * the column will go to the table that has @ManyToOne annotation ,not the clas that has @oneToMany*/
-    @OneToMany
+
+    /** be careful you should have ( cascade = CascadeType.ALL ) in the class that has @ManyToOne this test class or7
+     * you should save the component and fill of that class in the=ier Repository
+     * then put them in build class
+     * and if you do not have cascade andif you do not have this you get error*/
+    //customerRepository.save(customer1);
+    /** so have ( cascade = CascadeType.ALL ) in the annotation of class and table that will contain the
+     * @ManyToOne you will not get that error
+     * not necessary for @OneToMany class*/
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "Customer_Id",                   // if you change this ,the previous column does not delete and the new column will add by this name
                                                         // be careful have this name = "Customer_Id"  to the field type class
                                                         // if not you get to column that have same rfrenxce and trash and spam

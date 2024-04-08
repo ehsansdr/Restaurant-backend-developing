@@ -12,8 +12,8 @@ import java.util.List;
 @Entity
 @Table(
         name = "Food",
-        uniqueConstraints = @UniqueConstraint(//if you want to have some unique for column do this
-                name = "Foods_unique",
+               uniqueConstraints = @UniqueConstraint(//if you want to have some unique for column do this
+                        name = "Foods_unique",
                 columnNames = "Foods_name"//the name of the column the real one
         )
 )//NOT CHANGE THE PAST TABLE ,CREATE NEW AND DO NOTHING ABOUT PREVIOUS TABLE
