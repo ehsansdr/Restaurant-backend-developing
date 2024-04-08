@@ -36,8 +36,8 @@ public class Transaction {
     )
     private Long TransactionId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "customerId",                /** if you do not name this you will
+    @ManyToOne(cascade = CascadeType.ALL)           /** if you do not have this you get exception */
+    @JoinColumn( name = "Customer_Id",              /** if you do not name this you will
                                                     get customer_customer_Id so name this */
                 referencedColumnName = "customerId")
     private Customer customer;

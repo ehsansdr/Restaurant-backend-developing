@@ -62,16 +62,19 @@ public class Customer {
 
     /** you will not see this column  in this class table ,
      * you see this to the table or class that you have the type (in this case you see ths in "Transaction" )
-     * be careful, if here you have @OneToMany ,it should have @ManyToOne in the that type class
-     * (in this case you should have @ManyToOne in "Transaction" )
-     * and have real and same referencedColumnName = "(field name ,not that column name that shows for column in database,the java class name)"*/
+     * be careful, if here you have @OneToMany ,it should have @ManyToOne on this class type ("Customer") in the that type class
+     * (in this case you should have @ManyToOne in "Transaction" class )
+     * and have real and same referencedColumnName = "(field name ,not that column name that shows for column in database,the java class name)"
+     * the column will go to the table that has @ManyToOne annotation ,not the clas that has @oneToMany*/
     @OneToMany
-    @JoinColumn(name = "Orders",                        // if you change this the previous column does not delete and the new column will add by this name
+    @JoinColumn(name = "Customer_Id",                   // if you change this ,the previous column does not delete and the new column will add by this name
+                                                        // be careful have this name = "Customer_Id"  to the field type class
+                                                        // if not you get to column that have same rfrenxce and trash and spam
             referencedColumnName = "customerId")        // if you want to reference that column has this in its calls
-                                                        // in the class you have @OneToMany and have this reference to that class
+    private List<Transaction> transactions;             // in the class you have @OneToMany and have this reference to that class
                                                         // and have this referencedColumnName = "customerId") exactly
                                                         // no mather that class (the below type object)has this field
-    private List<Transaction> transactions;
+
 
     public void adding(Transaction transaction){
         if (transactions == null) {
