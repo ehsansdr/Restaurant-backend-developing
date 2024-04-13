@@ -45,10 +45,11 @@ public class Transaction {
      * @ManyToOne you will not get that error
      * not necessary for @OneToMany class*/
 
-    @ManyToOne(cascade = CascadeType.ALL)           /** if you do not have this you get exception */
-    @JoinColumn( name = "Customer_Id",              /** if you do not name this you will
+    @ManyToOne                            /** every time you have @ManyToOne add @JoinColumn
+                                                    if you do not have this you get exception */
+    @JoinColumn( name = "Customer_Iddds"              /** if you do not name this you will
                                                     get customer_customer_Id so name this */
-                referencedColumnName = "customerId")
+                )
     private Customer customer;
 
     @OneToMany                                              /** if you do not have this you get exception */
