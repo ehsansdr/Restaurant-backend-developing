@@ -77,12 +77,13 @@ public class Customer {
     /** so have ( cascade = CascadeType.ALL ) in the annotation of class and table that will contain the
      * @ManyToOne you will not get that error
      * not necessary for @OneToMany class*/
-    @OneToMany( mappedBy = "customer") // it try to find the object that has name to this so  be careful about letters and write exactly the same
-                                                        // if you change this ,the previous column does not delete and the new column will add by this name
+    @OneToMany( cascade = CascadeType.ALL,
+            mappedBy = "customer")          // it try to find the object that has name to this so  be careful about letters and write exactly the same
+    private List<Transaction> transactions;             // if you change this ,the previous column does not delete and the new column will add by this name
                                                         // be careful have this name = "Customer_Id"  to the field type class
                                                         // if not you get to column that have same rfrenxce and trash and spam
                                                         // if you want to reference that column has this in its calls
-    private List<Transaction> transactions;             // in the class you have @OneToMany and have this reference to that class
+                                                        // in the class you have @OneToMany and have this reference to that class
                                                         // and have this referencedColumnName = "customerId") exactly
                                                         // no mather that class (the below type object)has this field
 

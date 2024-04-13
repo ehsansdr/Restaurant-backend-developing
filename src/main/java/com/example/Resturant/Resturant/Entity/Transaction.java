@@ -47,10 +47,10 @@ public class Transaction {
 
     @ManyToOne                            /** every time you have @ManyToOne add @JoinColumn
                                                     if you do not have this you get exception */
-    @JoinColumn( name = "Customer_Iddds"              /** if you do not name this you will
-                                                    get customer_customer_Id so name this */
-                )
+    @JoinColumn( name = "Customer_Id")              /** if you do not name this you will get customer_customer_Id so name this */
     private Customer customer;
+
+
 
     @OneToMany                                              /** if you do not have this you get exception */
                                                             /** if you do not name this you will
