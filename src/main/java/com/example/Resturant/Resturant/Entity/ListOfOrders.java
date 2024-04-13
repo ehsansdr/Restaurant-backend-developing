@@ -25,25 +25,26 @@ import java.util.List;
 public class ListOfOrders {
 
     @Id
-    @OneToOne
-    @JoinColumn(
-            name = "foodList",
-            referencedColumnName = ""
-    )
-    private List<Food> foodList;
+    private Long foodId;
+//    @OneToOne
+//    @JoinColumn(
+//            name = "foodList",
+//            referencedColumnName = ""
+//    )
+    //private List<Food> foodList;
 
-    public void addAddingFood(Food food){
-//we add this method becuase we have @ManyToMany in field for students
-
-        if (foodList == null) {
-            this.foodList = new ArrayList<>();
-            foodList.add(food);
-            System.out.println("\nthis.students = new ArrayList<>();\n");
-        }
-        else{
-            foodList.add(food);
-            System.out.println("\nstudents.add(student);\n");
-        }
-    }
+//    public void addAddingFood(Food food){
+////we add this method becuase we have @ManyToMany in field for students
+//
+//        if (foodList == null) {
+//            this.foodList = new ArrayList<>();
+//            foodList.add(food);
+//            System.out.println("\nthis.students = new ArrayList<>();\n");
+//        }
+//        else{
+//            foodList.add(food);
+//            System.out.println("\nstudents.add(student);\n");
+//        }
+//    }
 
 }
