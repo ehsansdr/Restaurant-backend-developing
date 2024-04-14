@@ -39,6 +39,10 @@ public class Ingredient {
     private String unit;      //kg or litre
     private long pricePerUnit;
 
+    @ManyToOne()
+    @JoinColumn(name = "ingredients_of_food")
+    private Food food;
+
 
 }
 

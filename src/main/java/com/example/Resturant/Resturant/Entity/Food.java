@@ -43,6 +43,12 @@ public class Food {
     private long price;                     //kg or litre
     private long amount;
 
+    @OneToMany(mappedBy = "food",
+            cascade = CascadeType.ALL)
+
+    private List<Ingredient> ingredients;
+
+
 
 //    /** bug */
 //    @ManyToOne(cascade = CascadeType.ALL)

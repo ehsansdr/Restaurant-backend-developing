@@ -1,6 +1,7 @@
 package com.example.Resturant.Resturant.Repository;
 
 import com.example.Resturant.Resturant.Entity.Customer;
+import com.example.Resturant.Resturant.Entity.Food;
 import com.example.Resturant.Resturant.Entity.Transaction;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ class TransactionRepositoryTest {
     private TransactionRepository transactionRepository;
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private FoodRepository foodRepository;
 
     @Test
     public void saveTransaction(){
@@ -44,6 +48,49 @@ class TransactionRepositoryTest {
 
         System.out.println("\n\ntransaction : " + transaction + "added\n");
 
+    }
+
+    @Test
+    public void addingTransactionAndFood(){
+
+        Food food1 = Food.builder()
+                .FoodsName("hot dog")
+                .amount(3)
+                .price(5236)
+                .build();
+        foodRepository.save(food1);
+        Food food2 = Food.builder()
+                .FoodsName("kerakof")
+                .amount(8)
+                .price(1000)
+                .build();
+        foodRepository.save(food2);
+        Food food3 = Food.builder()
+                .FoodsName("royal")
+                .amount(2)
+                .price(5500)
+                .build();
+        foodRepository.save(food3);
+
+        Customer customer1 = Customer.builder()
+                .firstName("akbar")
+                .LastName("Rahimi nia")
+                .phoneNumber("0929684557")
+                .postal_Code("786646")
+                .subscription_Code("265555")
+                .build();
+
+        customerRepository.save(customer1);
+
+        Transaction transaction = Transaction.builder()
+                .customer(customer1)
+                .build();
+
+        transaction.addFood(food1);
+        transaction.addFood(food2);
+        transaction.addFood(food3);
+
+        transactionRepository.save(transaction);
     }
 
 }

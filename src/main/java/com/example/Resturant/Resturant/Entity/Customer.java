@@ -1,5 +1,7 @@
 package com.example.Resturant.Resturant.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,6 +64,8 @@ public class Customer {
     private String subscription_Code;
 
 
+
+
     /** you will not see this column  in this class table ,
      * you see this to the table or class that you have the type (in this case you see ths in "Transaction" )
      * be careful, if here you have @OneToMany ,it should have @ManyToOne on this class type ("Customer") in the that type class
@@ -77,9 +81,21 @@ public class Customer {
     /** so have ( cascade = CascadeType.ALL ) in the annotation of class and table that will contain the
      * @ManyToOne you will not get that error
      * not necessary for @OneToMany class*/
+
+
+
+
+
+
     @OneToMany( cascade = CascadeType.ALL,
-            mappedBy = "customer")          // it try to find the object that has name to this so  be careful about letters and write exactly the same
-    private List<Transaction> transactions;             // if you change this ,the previous column does not delete and the new column will add by this name
+            mappedBy = "customer")                      // it try to find the object that has name to neneath class data type so  be careful about letters and write exactly the same
+    @JsonManagedReference                               // @JsonManagedReference is the forward part of reference – the one that gets serialized normally.
+    private List<Transaction> transactions;             // @JsonBackReference is the back part of reference – it will be omitted from serialization.
+                                                        // https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
+                                                        // https://stackoverflow.com/questions/72794421/what-is-the-meaning-of-jsonmanagedreference
+
+
+                                                        // if you change this ,the previous column does not delete and the new column will add by this name
                                                         // be careful have this name = "Customer_Id"  to the field type class
                                                         // if not you get to column that have same rfrenxce and trash and spam
                                                         // if you want to reference that column has this in its calls

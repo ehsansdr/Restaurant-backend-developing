@@ -34,12 +34,12 @@ public class TransactionsController {
 
         return transactionRepository.getTransactionByTransactionId(transaction_id);
     }
-//    @PutMapping("/addTreansac")
-//    public Object getTransactionByTransactionId(@RequestBody int transaction_id){
-//        System.out.println("getAllTransactionAndName called");
-//        /** because we get not unique object and not same for join , I put return type as List<Object> */
-//
-//        return transactionRepository.getTransactionByTransactionId(transaction_id).;
-//    }
+
+    @PutMapping("/addtransactionwithfoods")
+    public Transaction addTransaction(@RequestBody Transaction transaction){
+
+
+        return transactionRepository.save(transaction);
+    }
 
 }

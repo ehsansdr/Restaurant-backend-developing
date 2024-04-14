@@ -1,5 +1,6 @@
 package com.example.Resturant.Resturant.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,10 +46,13 @@ public class Transaction {
      * @ManyToOne you will not get that error
      * not necessary for @OneToMany class*/
 
-    @ManyToOne                            /** every time you have @ManyToOne add @JoinColumn
+    @ManyToOne                                      /** every time you have @ManyToOne add @JoinColumn
                                                     if you do not have this you get exception */
     @JoinColumn( name = "Customer_Id")              /** if you do not name this you will get customer_customer_Id so name this */
-    private Customer customer;
+    @JsonBackReference                              //@JsonManagedReference is the forward part of reference – the one that gets serialized normally.
+    private Customer customer;                      // @JsonBackReference is the back part of reference – it will be omitted from serialization.
+                                                    // https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
+                                                    // https://stackoverflow.com/questions/72794421/what-is-the-meaning-of-jsonmanagedreference
 
 
 
@@ -110,18 +114,18 @@ public class Transaction {
     //List<Food> foods = new ArrayList<>();
 //
 //
-//    public void addStudent(Food food){
-//        //we add this method becuase we have @ManyToMany in field for students
-//
-//        if (foods == null) {
-//            this.foods = new ArrayList<>();
-//            this.foods.add(food);
-//            System.out.println("\nthis.students = new ArrayList<>();\n");
-//        }
-//        else{
-//            this.foods.add(food);
-//            System.out.println("\nstudents.add(student);\n");
-//        }
-//    }
+    public void addFood(Food food){
+        //we add this method becuase we have @ManyToMany in field for students
+
+        if (foods == null) {
+            this.foods = new ArrayList<>();
+            this.foods.add(food);
+            System.out.println("\nthis.students = new ArrayList<>();\n");
+        }
+        else{
+            this.foods.add(food);
+            System.out.println("\nstudents.add(student);\n");
+        }
+    }
 
 }
